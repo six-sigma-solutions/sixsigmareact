@@ -1,7 +1,27 @@
+import { useEffect, useRef } from "react";
 import { CheckCircle2 } from "lucide-react";
-import bg2 from "../assets/BG2.webp";
+import lottie from "lottie-web";
 
 export default function AboutProcessIndustries() {
+  const lottieRef = useRef(null);
+
+  useEffect(() => {
+    if (!lottieRef.current) return;
+
+    const animation = lottie.loadAnimation({
+      container: lottieRef.current,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/img/business.json",
+      rendererSettings: {
+        preserveAspectRatio: "xMidYMid meet",
+      },
+    });
+
+    return () => animation.destroy();
+  }, []);
+
   return (
     <>
       {/* ================= ABOUT ================= */}
@@ -9,14 +29,17 @@ export default function AboutProcessIndustries() {
         id="about"
         className="py-24 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center"
       >
+        {/* LEFT : LOTTIE (REPLACED IMAGE) */}
         <div className="relative" data-aos="fade-right">
-          <img
-            src={bg2}
-            alt="About Six Sigma Solutions"
-            className="w-full rounded-[2.5rem] shadow-2xl border"
-          />
+          <div className="w-full h-[420px] rounded-[2.5rem] shadow-2xl border bg-white flex items-center justify-center">
+            <div
+              ref={lottieRef}
+              className="w-full h-full"
+            />
+          </div>
         </div>
 
+        {/* RIGHT : CONTENT (UNCHANGED) */}
         <div data-aos="fade-left">
           <span className="text-teal font-bold uppercase tracking-widest text-sm">
             About Us
@@ -52,8 +75,6 @@ export default function AboutProcessIndustries() {
       {/* ================= OUR PROCESS ================= */}
       <section id="process" className="py-24 px-6 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-
-          {/* Heading */}
           <div className="text-center mb-16" data-aos="fade-up">
             <span className="text-teal font-bold uppercase tracking-widest text-sm">
               Our Methodology
@@ -67,7 +88,6 @@ export default function AboutProcessIndustries() {
             </p>
           </div>
 
-          {/* DMAIC Cards */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-8 text-center">
             {[
               {
@@ -106,11 +126,7 @@ export default function AboutProcessIndustries() {
       </section>
 
       {/* ================= INDUSTRIES ================= */}
-      <section
-        id="industries"
-        className="py-24 px-6 max-w-7xl mx-auto"
-      >
-        {/* Heading */}
+      <section id="industries" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16" data-aos="fade-up">
           <span className="text-teal font-bold uppercase tracking-widest text-sm">
             Industries
@@ -124,7 +140,6 @@ export default function AboutProcessIndustries() {
           </p>
         </div>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-center">
           {[
             "IT & Software",

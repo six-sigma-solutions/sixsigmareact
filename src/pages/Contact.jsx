@@ -134,6 +134,14 @@ function Contact() {
     }
   }
 
+  const renderAnimatedLabel = (text) => {
+    return text.split('').map((char, index) => (
+        <span key={index} style={{ transitionDelay: `${index * 50}ms` }}>
+        {char === ' ' ? '\u00A0' : char}
+      </span>
+    ))
+  }
+
   return (
       <main className="pt-32 pb-24 px-6 max-w-4xl mx-auto">
         <div
@@ -148,43 +156,49 @@ function Contact() {
           <form onSubmit={handleSubmit} className="space-y-8" noValidate>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Full Name */}
-              <div className="input-wrapper relative min-h-[64px]">
-                <input
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    autoComplete="name"
-                    maxLength={40}
-                    placeholder="Full Name"
-                    className={`w-full border-b-2 py-4 focus:border-teal outline-none transition-colors ${
-                        errors.fullName ? 'border-red-500' : 'border-slate-200'
-                    }`}
-                />
+              <div className="form-control-wrapper">
+                <div className="form-control">
+                  <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      autoComplete="name"
+                      maxLength={40}
+                      required
+                      className={errors.fullName ? 'error' : ''}
+                  />
+                  <label>
+                    {renderAnimatedLabel('Full Name')}
+                  </label>
+                </div>
                 {errors.fullName && (
-                    <div className="absolute top-full left-0 mt-2 bg-red-500 text-white px-3 py-2 rounded-lg text-xs font-semibold z-10 animate-tooltip">
+                    <div className="error-tooltip">
                       {errors.fullName}
                     </div>
                 )}
               </div>
 
               {/* Mobile */}
-              <div className="input-wrapper relative min-h-[64px]">
-                <input
-                    type="tel"
-                    name="mobile"
-                    value={formData.mobile}
-                    onChange={handleChange}
-                    autoComplete="tel"
-                    maxLength={10}
-                    inputMode="numeric"
-                    placeholder="Mobile Number"
-                    className={`w-full border-b-2 py-4 focus:border-teal outline-none transition-colors ${
-                        errors.mobile ? 'border-red-500' : 'border-slate-200'
-                    }`}
-                />
+              <div className="form-control-wrapper">
+                <div className="form-control">
+                  <input
+                      type="tel"
+                      name="mobile"
+                      value={formData.mobile}
+                      onChange={handleChange}
+                      autoComplete="tel"
+                      maxLength={10}
+                      inputMode="numeric"
+                      required
+                      className={errors.mobile ? 'error' : ''}
+                  />
+                  <label>
+                    {renderAnimatedLabel('Mobile Number')}
+                  </label>
+                </div>
                 {errors.mobile && (
-                    <div className="absolute top-full left-0 mt-2 bg-red-500 text-white px-3 py-2 rounded-lg text-xs font-semibold z-10 animate-tooltip">
+                    <div className="error-tooltip">
                       {errors.mobile}
                     </div>
                 )}
@@ -192,42 +206,48 @@ function Contact() {
             </div>
 
             {/* Email */}
-            <div className="input-wrapper relative min-h-[64px]">
-              <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  autoComplete="email"
-                  maxLength={80}
-                  placeholder="Email Address"
-                  className={`w-full border-b-2 py-4 focus:border-teal outline-none transition-colors ${
-                      errors.email ? 'border-red-500' : 'border-slate-200'
-                  }`}
-              />
+            <div className="form-control-wrapper">
+              <div className="form-control">
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    autoComplete="email"
+                    maxLength={80}
+                    required
+                    className={errors.email ? 'error' : ''}
+                />
+                <label>
+                  {renderAnimatedLabel('Email Address')}
+                </label>
+              </div>
               {errors.email && (
-                  <div className="absolute top-full left-0 mt-2 bg-red-500 text-white px-3 py-2 rounded-lg text-xs font-semibold z-10 animate-tooltip">
+                  <div className="error-tooltip">
                     {errors.email}
                   </div>
               )}
             </div>
 
             {/* Message */}
-            <div className="input-wrapper relative min-h-[64px]">
-            <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows={3}
-                minLength={10}
-                maxLength={500}
-                placeholder="Tell us about your project"
-                className={`w-full border-b-2 py-4 focus:border-teal outline-none transition-colors resize-none ${
-                    errors.message ? 'border-red-500' : 'border-slate-200'
-                }`}
-            />
+            <div className="form-control-wrapper">
+              <div className="form-control">
+              <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={3}
+                  minLength={10}
+                  maxLength={500}
+                  required
+                  className={errors.message ? 'error' : ''}
+              />
+                <label>
+                  {renderAnimatedLabel('Tell us about your project')}
+                </label>
+              </div>
               {errors.message && (
-                  <div className="absolute top-full left-0 mt-2 bg-red-500 text-white px-3 py-2 rounded-lg text-xs font-semibold z-10 animate-tooltip">
+                  <div className="error-tooltip">
                     {errors.message}
                   </div>
               )}
@@ -285,6 +305,98 @@ function Contact() {
         </div>
 
         <style>{`
+        /* Animated Form Controls */
+        .form-control-wrapper {
+          position: relative;
+          margin: 20px 0 40px;
+        }
+
+        .form-control {
+          position: relative;
+          width: 100%;
+        }
+
+        .form-control input,
+        .form-control textarea {
+          background-color: transparent;
+          border: 0;
+          border-bottom: 2px solid #cbd5e1;
+          display: block;
+          width: 100%;
+          padding: 15px 0;
+          font-size: 18px;
+          color: #0A2540;
+          transition: border-color 0.3s ease;
+        }
+
+        .form-control textarea {
+          resize: none;
+          font-family: inherit;
+        }
+
+        .form-control input:focus,
+        .form-control input:valid,
+        .form-control textarea:focus,
+        .form-control textarea:valid {
+          outline: 0;
+          border-bottom-color: #14B8A6;
+        }
+
+        .form-control input.error,
+        .form-control textarea.error {
+          border-bottom-color: #ef4444;
+        }
+
+        .form-control label {
+          position: absolute;
+          top: 15px;
+          left: 0;
+          pointer-events: none;
+        }
+
+        .form-control label span {
+          display: inline-block;
+          font-size: 18px;
+          min-width: 5px;
+          color: #64748b;
+          transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .form-control input:focus + label span,
+        .form-control input:valid + label span,
+        .form-control textarea:focus + label span,
+        .form-control textarea:valid + label span {
+          color: #14B8A6;
+          transform: translateY(-30px);
+          font-size: 14px;
+        }
+
+        .error-tooltip {
+          position: absolute;
+          top: calc(100% + 8px);
+          left: 0;
+          background-color: #ef4444;
+          color: white;
+          padding: 8px 12px;
+          border-radius: 8px;
+          font-size: 12px;
+          font-weight: 600;
+          z-index: 10;
+          animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Button Styles */
         .animated-send-button {
           cursor: pointer;
           border-radius: 16px;
@@ -349,7 +461,6 @@ function Contact() {
           overflow: visible;
         }
 
-        /* Letters Animation */
         .button-state p span {
           display: block;
           opacity: 0;
@@ -399,7 +510,6 @@ function Contact() {
           }
         }
 
-        /* Plane Animation */
         .state-default .button-icon svg {
           animation: land 0.6s ease forwards;
         }
@@ -443,7 +553,6 @@ function Contact() {
           }
         }
 
-        /* Contrail */
         .state-default .button-icon:before {
           content: "";
           position: absolute;
@@ -476,7 +585,6 @@ function Contact() {
           }
         }
 
-        /* States */
         .state-sent {
           display: none;
         }

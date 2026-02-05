@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
+import lottie from "lottie-web";
 import { Link } from 'react-router-dom'
 import { ChevronDown, ArrowRight } from 'lucide-react'
+import AboutProcessIndustries from "../components/AboutProcessIndustries";
+import Testimonials from "../components/Testimonials";
 
 // Services data
 const services = [
@@ -47,7 +50,7 @@ const team = [
     name: 'Dr. V. Cheallapondy',
     role: 'Chief Executive Officer',
     description: 'Innovative leader driving organizational excellence across the globe.',
-    image: '/img/1.png',
+    image: '/img/1.jpeg',
     initials: 'VC'
   },
   {
@@ -173,26 +176,23 @@ function Home() {
   const [activeFaq, setActiveFaq] = useState(null)
   const lottieRef = useRef(null)
 
-  useEffect(() => {
-    // Load Lottie animation
-    const loadLottie = async () => {
-      if (typeof window !== 'undefined' && lottieRef.current) {
-        const lottie = await import('https://unpkg.com/lottie-web/build/player/lottie.min.js')
-        lottie.default.loadAnimation({
-          container: lottieRef.current,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: '/img/business.json',
-          rendererSettings: {
-            preserveAspectRatio: 'xMidYMid meet',
-            progressiveLoad: true
-          }
-        })
-      }
-    }
-    loadLottie().catch(console.error)
-  }, [])
+ 
+useEffect(() => {
+  if (!lottieRef.current) return;
+
+  const animation = lottie.loadAnimation({
+    container: lottieRef.current,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "/img/business.json", // MUST be in public/img
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid meet",
+    },
+  });
+
+  return () => animation.destroy();
+}, []);
 
   const toggleFaq = (index) => {
     setActiveFaq(activeFaq === index ? null : index)
@@ -244,23 +244,11 @@ function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-4xl font-bold text-navy mb-4">Meet Our Team</h2>
-            <p className="text-slate-500 max-w-2xl mx-auto">
-              Dedicated professionals committed to delivering excellence in every project.
-            </p>
-          </div>
+      {/* About + Process + Industries */}
+      <AboutProcessIndustries />
 
-          <div className="grid md:grid-cols-3 gap-8" data-aos="fade-up">
-            {team.map((member, index) => (
-              <TeamCard key={index} member={member} />
-            ))}
-          </div>
-        </div>
-      </section>
+
+    
 
       {/* FAQ Section */}
       <section id="faq" className="py-20 px-6 bg-slate-50">
@@ -285,7 +273,29 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Testimonials */}
+         <Testimonials />
+
+      {/* Pillars Section */}
+      <section id="about" className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-4xl font-bold text-navy mb-4">Meet Our Team</h2>
+            <p className="text-slate-500 max-w-2xl mx-auto">
+              Dedicated professionals committed to delivering excellence in every project.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8" data-aos="fade-up">
+            {team.map((member, index) => (
+              <TeamCard key={index} member={member} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      
+     {/* CTA Section */}
       <section className="bg-teal py-20 px-6 text-center text-white">
         <div className="max-w-4xl mx-auto" data-aos="zoom-in">
           <h2 className="text-4xl font-bold mb-6">

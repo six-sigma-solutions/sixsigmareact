@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -35,12 +36,14 @@ function App() {
     <div className="bg-white text-slate-800 font-baloo">
       <ScrollToTop />
       <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-and-conditions" element={<TermsConditions />} />
       </Routes>
+
       <Footer />
     </div>
   )

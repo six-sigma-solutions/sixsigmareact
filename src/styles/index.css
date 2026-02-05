@@ -84,6 +84,15 @@ body {
 /* ===============================
    SERVICES — EXPANDABLE CARDS
 ================================ */
+
+.bg-teal-500 {
+  background-color: #14b8a6;
+  color: #ffffff; /* SAME COLOR = invisible */
+}
+.learn-more-btn svg {
+  stroke: currentColor;
+}
+
 .solution-cards {
   display: flex;
   gap: 12px;

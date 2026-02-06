@@ -4,11 +4,11 @@ import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ================= IMAGE IMPORTS ================= */
-import img1 from "../assets/1.jpeg";
-import img2 from "../assets/2.jpeg";
-import img3 from "../assets/3.jpeg";
-import img4 from "../assets/4.jpeg";
-import img5 from "../assets/5.jpeg";
+import Webdev from "../assets/Web develop.png";
+import Mobile from "../assets/Mobile.png";
+import Webdesign from "../assets/Web design.png";
+import Ai from "../assets/Ai.png";
+import Digital from "../assets/Digital.png";
 
 /* ================= SERVICES DATA ================= */
 const services = [
@@ -17,35 +17,35 @@ const services = [
     title: "Web Development",
     description:
       "Build modern, responsive websites that drive business growth with cutting-edge technologies.",
-    image: img1,
+    image: Webdev,
   },
   {
     id: "mobile-app-development",
     title: "Mobile App Development",
     description:
       "Create powerful Android & iOS apps with seamless user experience.",
-    image: img4,
+    image: Mobile,
   },
   {
     id: "web-design",
     title: "Web Design",
     description:
       "Craft beautiful, user-centered designs that strengthen your brand.",
-    image: img2,
+    image: Webdesign,
   },
   {
     id: "ai-agents",
     title: "AI Agents",
     description:
       "Automate workflows and enhance decision-making using AI agents.",
-    image: img3,
+    image: Ai,
   },
   {
     id: "digital-marketing",
     title: "Digital Marketing",
     description:
       "Grow your online presence using SEO, PPC, and content marketing.",
-    image: img5,
+    image: Digital,
   },
 ];
 

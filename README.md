@@ -270,10 +270,13 @@ For Netlify & GitHub Pages, add a redirect rule.
 Use **HashRouter** OR configure SPA fallback.
 
 ## ✅ Recommended Platform Summary
-| Platform                                    | Recommendation                                 |
-| **Vercel**                                  | ⭐⭐⭐⭐⭐ Best (Fast, easy, auto-deploy)    |
-| **Netlify**                                 | ⭐⭐⭐⭐ Very good                           |
-| **GitHub Pages**                            | ⭐⭐ Only for demos                           |
+
+| Platform         | Recommendation                       |
+| ---------------- | ------------------------------------ |
+| **Vercel**       | ⭐⭐⭐⭐⭐ Best (Fast, easy, auto-deploy) |
+| **Netlify**      | ⭐⭐⭐⭐ Very good                       |
+| **GitHub Pages** | ⭐⭐ Only for demos                    |
+
 
 ## 🏁 Final Recommendation
 

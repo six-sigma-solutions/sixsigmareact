@@ -2,25 +2,29 @@ import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useCallback } from "react";
 import { Star } from "lucide-react";
+import T1 from "../assets/Testimonial1.jpg";
+import T2 from "../assets/Testimonial2.jpg";
+import T3 from "../assets/Testimonial3.jpg";
+
 
 const testimonials = [
   {
     quote: "Six Sigma Solutions provided resources for crucial requirements within the timeframe given. Service from the team is excellent and highly professional.",
     name: "Suresh V.",
     designation: "Test Manager, Infosys",
-    src: "src/assets/Testimonial2.jpg"
+    src: T2
   },
   {
     quote: "The dedication and hard work from Six Sigma Solutions is amazing! Their support has been instrumental in our operational ramp-up.",
     name: "Assistant Manager",
     designation: "eG Innovations Pvt Ltd",
-    src: "src/assets/Testimonial1.jpg"
+    src: T1
   },
   {
     quote: "I appreciate the team for their good work. The way they handle queries and provide relevant information is really commendable. Best in class.",
     name: "Chandrasekaran M.",
     designation: "Consultant, TCS",
-    src: "src/assets/Testimonial3.jpg"
+    src: T3
   }
 ];
 

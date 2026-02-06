@@ -134,7 +134,7 @@ Custom colors and fonts are configured in `tailwind.config.js`:
   - Uses a Google Apps Script backend
   - Endpoint can be updated in:
     ```bash
-   src/pages/Contact.jsx
+     src/pages/Contact.jsx
    ```
 
 ## 📱 Responsive Design

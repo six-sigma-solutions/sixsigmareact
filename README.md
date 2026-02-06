@@ -160,7 +160,7 @@ Optimized for all screen sizes:
 
 This project is built with Vite + React and can be deployed easily on modern hosting platforms.
 
-## 🔷 Deploy on Vercel (Recommended)
+## 1 🔷 Deploy on Vercel (Recommended)
 
 Vercel is the best choice for React + Vite projects.
 
@@ -172,47 +172,49 @@ Vercel is the best choice for React + Vite projects.
 4.  Import your GitHub repository
 5.  Use these settings:
 
-| Setting          | Value           |
-| ---------------- | --------------- |
-| Framework        | **Vite**        |
-| Build Command    | `npm run build` |
-| Output Directory | `dist`          |
-| Install Command  | `npm install`   |
+| Setting                                    | Value                |
+| ------------------------------------------ | ---------------------|
+| Framework                                  | **Vite**             |
+| Build Command                              | `npm run build`      |
+| Output Directory                           | `dist`               |
+| Install Command                            | `npm install`         |
 
-6. **Click Deploy**
+6.  Click Deploy
 
  - ✅ Automatic builds on every push
  - ✅ Free SSL & CDN
  - ✅ Fastest setup
 
-## 🔷 Deploy on Netlify
-## Option 1: Netlify UI (Recommended)
+## 2 🔷 Deploy on Netlify
+**Option 1: Netlify UI (Recommended)**
 
-1. **Push project to GitHub**
-2. **Go to 👉 https://netlify.com**
-3. **Click Add new site → Import from Git**
-4. **Select your repository**
-5. **Configure build settings:**
+1.  Push project to GitHub
+2.  Go to 👉 https://netlify.com
+3.  Click Add new site → Import from Git
+4.  Select your repository
+5.  Configure build settings:
 
-| Setting           | Value           |
-| ----------------- | --------------- |
-| Build command     | `npm run build` |
-| Publish directory | `dist`          |
+| Setting                                    | Value                |
+| ------------------------------------------ | -------------------- |
+| Build command                              | `npm run build`      |
+| Publish directory                          | `dist`               |
 
 
-6. **Click Deploy site**
+6.  Click Deploy site
 
-## Option 2: Netlify CLI
+**Option 2: Netlify CLI**
+
 ```bash
 npm install -g netlify-cli
 npm run build
 netlify deploy --prod --dir=dist
 ```
-## 🔷 Deploy on GitHub Pages
+## 3 🔷 Deploy on GitHub Pages
 
-## GitHub Pages requires a **base path** configuration.
+ GitHub Pages requires a **base path** configuration.
 
 ## Step 1: Update vite.config.js
+
 ```bash
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
@@ -223,10 +225,12 @@ export default defineConfig({
 });
 ```
 ## Step 2: Install gh-pages
+
 ```bash
 npm install --save-dev gh-pages
 ```
 ## Step 3: Update package.json
+
 ```bash
 {
   "homepage": "https://your-username.github.io/six-sigma-react",
@@ -237,22 +241,26 @@ npm install --save-dev gh-pages
 }
 ```
 ## Step 4: Deploy
+
 ```bash
 npm run build
 npm run deploy
 ```
 
 Your site will be live at:
+
 ```bash
 https://your-username.github.io/six-sigma-react
 ```
 
 ## ⚠️ Important Notes (All Platforms)
+
 *React Router Fix (Required)*
 
 For Netlify & GitHub Pages, add a redirect rule.
 
-## Netlify ```bash(public/_redirects)```
+## Netlify **(public/_redirects)**
+
 ```bash
 /* /index.html 200
 ```
@@ -262,11 +270,10 @@ For Netlify & GitHub Pages, add a redirect rule.
 Use **HashRouter** OR configure SPA fallback.
 
 ## ✅ Recommended Platform Summary
-| Platform         | Recommendation                       |
-| ---------------- | ------------------------------------ |
-| **Vercel**       | ⭐⭐⭐⭐⭐ Best (Fast, easy, auto-deploy) |
-| **Netlify**      | ⭐⭐⭐⭐ Very good                       |
-| **GitHub Pages** | ⭐⭐ Only for demos                    |
+| Platform                                    | Recommendation                                 |
+| **Vercel**                                  | ⭐⭐⭐⭐⭐ Best (Fast, easy, auto-deploy)    |
+| **Netlify**                                 | ⭐⭐⭐⭐ Very good                           |
+| **GitHub Pages**                            | ⭐⭐ Only for demos                           |
 
 ## 🏁 Final Recommendation
 

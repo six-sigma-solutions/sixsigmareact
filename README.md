@@ -166,11 +166,11 @@ Vercel is the best choice for React + Vite projects.
 
 ## Steps
 
-1. - Push your project to GitHub
-2. - Go to 👉 https://vercel.com
-3. - Click New Project
-4. - Import your GitHub repository
-5. - Use these settings:
+1.  Push your project to GitHub
+2.  Go to 👉 https://vercel.com
+3.  Click New Project
+4.  Import your GitHub repository
+5.  Use these settings:
 
 | Setting          | Value           |
 | ---------------- | --------------- |

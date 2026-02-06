@@ -29,7 +29,7 @@ export default function Testimonials() {
   const [rotationValues, setRotationValues] = useState([]);
 
   // Memoized navigation to prevent unnecessary re-renders
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback(() => { 
     setActive((prev) => (prev + 1) % testimonials.length);
   }, []);
 

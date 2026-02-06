@@ -10,6 +10,7 @@ import HeroGeometric from "../components/HeroGeometric";
 /* ================= TEAM DATA ================= */
 const team = [
   {
+    id: "cheallapondy",
     name: "Dr. V. Cheallapondy",
     role: "Chief Executive Officer",
     description:
@@ -18,6 +19,7 @@ const team = [
     initials: "VC",
   },
   {
+    id: "vasu",
     name: "Mr. S. Vasu",
     role: "Founder & Consultant",
     description: "Expert consultant helping organizations optimize workflows.",
@@ -25,6 +27,7 @@ const team = [
     initials: "SV",
   },
   {
+    id: "natasha",
     name: "Mrs. Natasha",
     role: "Head of Talent",
     description:
@@ -37,21 +40,25 @@ const team = [
 /* ================= FAQ DATA ================= */
 const faqs = [
   {
+    id: "services",
     question: "What services does Six Sigma Solutions offer?",
     answer:
       "We offer comprehensive IT solutions including web development, mobile app development, web design, AI agents, and digital marketing services tailored to your business needs.",
   },
   {
+    id: "timeline",
     question: "How long does a typical project take?",
     answer:
       "Project timelines vary based on complexity and scope. A simple website may take 2–4 weeks, while complex applications can take 3–6 months.",
   },
   {
+    id: "support",
     question: "Do you provide ongoing support?",
     answer:
       "Yes, we offer comprehensive maintenance and support packages after launch.",
   },
   {
+    id: "industries",
     question: "What industries do you serve?",
     answer:
       "We serve healthcare, finance, education, retail, manufacturing, and more.",
@@ -59,15 +66,16 @@ const faqs = [
 ];
 
 /* ================= FAQ ITEM ================= */
-function FaqItem({ faq, isActive, onClick }) {
+function FaqItem({ faq, isActive, onToggle }) {
   return (
     <div
-      className={`border border-slate-200 rounded-2xl overflow-hidden transition-all ${
-        isActive ? "bg-slate-50" : ""
+      className={`border border-slate-200 rounded-2xl overflow-hidden transition ${
+        isActive ? "bg-slate-50" : "bg-white"
       }`}
     >
       <button
-        onClick={onClick}
+        onClick={onToggle}
+        aria-expanded={isActive}
         className="w-full flex justify-between items-center p-6 text-left"
       >
         <span className="font-semibold text-navy pr-4">
@@ -79,8 +87,11 @@ function FaqItem({ faq, isActive, onClick }) {
           }`}
         />
       </button>
+
       {isActive && (
-        <p className="px-6 pb-6 text-slate-500">{faq.answer}</p>
+        <p className="px-6 pb-6 text-slate-500">
+          {faq.answer}
+        </p>
       )}
     </div>
   );
@@ -88,17 +99,18 @@ function FaqItem({ faq, isActive, onClick }) {
 
 /* ================= TEAM CARD ================= */
 function TeamCard({ member }) {
-  const [error, setError] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-slate-100 p-8 text-center">
       <div className="w-32 h-32 mx-auto mb-6">
-        {!error ? (
+        {!hasError ? (
           <img
             src={member.image}
             alt={member.name}
-            onError={() => setError(true)}
+            onError={() => setHasError(true)}
             className="w-32 h-32 rounded-full object-cover shadow-md"
+            loading="lazy"
           />
         ) : (
           <div className="w-32 h-32 rounded-full bg-slate-100 flex items-center justify-center text-2xl font-bold text-navy">
@@ -106,7 +118,10 @@ function TeamCard({ member }) {
           </div>
         )}
       </div>
-      <h4 className="font-bold text-navy text-lg">{member.name}</h4>
+
+      <h4 className="font-bold text-navy text-lg">
+        {member.name}
+      </h4>
       <p className="text-xs text-teal font-bold uppercase tracking-widest mt-1">
         {member.role}
       </p>
@@ -123,7 +138,7 @@ export default function Home() {
 
   return (
     <main>
-      {/* ✅ NEW HERO */}
+      {/* HERO */}
       <HeroGeometric />
 
       {/* SERVICES */}
@@ -145,13 +160,13 @@ export default function Home() {
           </div>
 
           <div className="space-y-4">
-            {faqs.map((faq, i) => (
+            {faqs.map((faq, index) => (
               <FaqItem
-                key={i}
+                key={faq.id}
                 faq={faq}
-                isActive={activeFaq === i}
-                onClick={() =>
-                  setActiveFaq(activeFaq === i ? null : i)
+                isActive={activeFaq === index}
+                onToggle={() =>
+                  setActiveFaq(activeFaq === index ? null : index)
                 }
               />
             ))}
@@ -175,8 +190,8 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {team.map((member, i) => (
-              <TeamCard key={i} member={member} />
+            {team.map((member) => (
+              <TeamCard key={member.id} member={member} />
             ))}
           </div>
         </div>
@@ -193,7 +208,7 @@ export default function Home() {
           </p>
           <Link
             to="/contact"
-            className="inline-block bg-white text-teal px-10 py-4 rounded-xl font-bold shadow-xl hover:scale-105 transition"
+            className="inline-block bg-white text-teal px-10 py-4 rounded-xl font-bold shadow-xl transition hover:scale-105"
           >
             Talk to an Expert
           </Link>

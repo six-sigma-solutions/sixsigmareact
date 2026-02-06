@@ -142,8 +142,8 @@ export default function AIAgents() {
         </ul>
       </section>
 
-      {/* TESTIMONIALS */}
-      <Testimonials />
+      {/* TESTIMONIALS 
+      <Testimonials /> */}
 
       {/* CTA */}
       <ServiceCTA />

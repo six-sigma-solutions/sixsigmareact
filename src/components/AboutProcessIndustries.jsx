@@ -2,13 +2,20 @@ import { useEffect, useRef } from "react";
 import { CheckCircle2 } from "lucide-react";
 import lottie from "lottie-web";
 
+
 export default function AboutProcessIndustries() {
   const lottieRef = useRef(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
     if (!lottieRef.current) return;
 
-    const animation = lottie.loadAnimation({
+    // Fix for React 18 StrictMode double render
+    if (animationRef.current) {
+      animationRef.current.destroy();
+    }
+
+    animationRef.current = lottie.loadAnimation({
       container: lottieRef.current,
       renderer: "svg",
       loop: true,
@@ -19,7 +26,9 @@ export default function AboutProcessIndustries() {
       },
     });
 
-    return () => animation.destroy();
+    return () => {
+      animationRef.current?.destroy();
+    };
   }, []);
 
   return (
@@ -29,17 +38,14 @@ export default function AboutProcessIndustries() {
         id="about"
         className="py-24 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center"
       >
-        {/* LEFT : LOTTIE (REPLACED IMAGE) */}
+        {/* LEFT : LOTTIE */}
         <div className="relative" data-aos="fade-right">
-          <div className="w-full h-[420px] rounded-[2.5rem] shadow-2xl border bg-white flex items-center justify-center">
-            <div
-              ref={lottieRef}
-              className="w-full h-full"
-            />
+          <div className="w-full h-[300px] sm:h-[360px] lg:h-[420px] rounded-[2.5rem] shadow-2xl border bg-white flex items-center justify-center">
+            <div ref={lottieRef} className="w-full h-full" />
           </div>
         </div>
 
-        {/* RIGHT : CONTENT (UNCHANGED) */}
+        {/* RIGHT : CONTENT */}
         <div data-aos="fade-left">
           <span className="text-teal font-bold uppercase tracking-widest text-sm">
             About Us

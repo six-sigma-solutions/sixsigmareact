@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react'
+import "../styles/form.css";
+
 
 const RULES = {
   nameMin: 3,
@@ -23,22 +25,22 @@ function Contact() {
     switch (name) {
       case 'fullName':
         if (value && value.length < RULES.nameMin) {
-          return '⚠️ Name must be at least 3 characters'
+          return ' Name must be at least 3 characters'
         }
         break
       case 'mobile':
         if (value && value.length !== RULES.mobileLength) {
-          return '⚠️ Mobile must be 10 digits'
+          return ' Mobile must be 10 digits'
         }
         break
       case 'email':
         if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          return '⚠️ Invalid email format'
+          return 'Invalid email format'
         }
         break
       case 'message':
         if (value && value.length < RULES.messageMin) {
-          return '⚠️ Minimum 10 characters required'
+          return ' Minimum 10 characters required'
         }
         break
     }
@@ -71,7 +73,7 @@ function Contact() {
     e.preventDefault()
 
     if (!navigator.onLine) {
-      setStatus({ message: '⚠️ You are offline. Please check your connection.', type: 'error' })
+      setStatus({ message: ' You are offline. Please check your connection.', type: 'error' })
       return
     }
 
@@ -79,26 +81,26 @@ function Contact() {
     let hasError = false
 
     if (formData.fullName.length < RULES.nameMin) {
-      newErrors.fullName = '⚠️ Enter a valid name'
+      newErrors.fullName = ' Enter a valid name'
       hasError = true
     }
     if (formData.mobile.length !== RULES.mobileLength) {
-      newErrors.mobile = '⚠️ Enter a valid mobile number'
+      newErrors.mobile = ' Enter a valid mobile number'
       hasError = true
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = '⚠️ Enter a valid email'
+      newErrors.email = ' Enter a valid email'
       hasError = true
     }
     if (formData.message.length < RULES.messageMin) {
-      newErrors.message = '⚠️ Message must be at least 10 characters'
+      newErrors.message = ' Message must be at least 10 characters'
       hasError = true
     }
 
     setErrors(newErrors)
 
     if (hasError) {
-      setStatus({ message: '⚠️ Please fix the errors above', type: 'error' })
+      setStatus({ message: ' Please fix the errors above', type: 'error' })
       return
     }
 
@@ -127,7 +129,7 @@ function Contact() {
       }, 3000)
     } catch (error) {
       console.error('Submission error:', error)
-      setStatus({ message: '⚠️ Submission failed. Try again.', type: 'error' })
+      setStatus({ message: 'Submission failed. Try again.', type: 'error' })
       setButtonState('default')
     } finally {
       setIsSubmitting(false)
@@ -303,339 +305,6 @@ function Contact() {
             )}
           </form>
         </div>
-
-        <style>{`
-        /* Animated Form Controls */
-        .form-control-wrapper {
-          position: relative;
-          margin: 20px 0 40px;
-        }
-
-        .form-control {
-          position: relative;
-          width: 100%;
-        }
-
-        .form-control input,
-        .form-control textarea {
-          background-color: transparent;
-          border: 0;
-          border-bottom: 2px solid #cbd5e1;
-          display: block;
-          width: 100%;
-          padding: 15px 0;
-          font-size: 18px;
-          color: #0A2540;
-          transition: border-color 0.3s ease;
-        }
-
-        .form-control textarea {
-          resize: none;
-          font-family: inherit;
-        }
-
-        .form-control input:focus,
-        .form-control input:valid,
-        .form-control textarea:focus,
-        .form-control textarea:valid {
-          outline: 0;
-          border-bottom-color: #14B8A6;
-        }
-
-        .form-control input.error,
-        .form-control textarea.error {
-          border-bottom-color: #ef4444;
-        }
-
-        .form-control label {
-          position: absolute;
-          top: 15px;
-          left: 0;
-          pointer-events: none;
-        }
-
-        .form-control label span {
-          display: inline-block;
-          font-size: 18px;
-          min-width: 5px;
-          color: #64748b;
-          transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .form-control input:focus + label span,
-        .form-control input:valid + label span,
-        .form-control textarea:focus + label span,
-        .form-control textarea:valid + label span {
-          color: #14B8A6;
-          transform: translateY(-30px);
-          font-size: 14px;
-        }
-
-        .error-tooltip {
-          position: absolute;
-          top: calc(100% + 8px);
-          left: 0;
-          background-color: #ef4444;
-          color: white;
-          padding: 8px 12px;
-          border-radius: 8px;
-          font-size: 12px;
-          font-weight: 600;
-          z-index: 10;
-          animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-5px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        /* Button Styles */
-        .animated-send-button {
-          cursor: pointer;
-          border-radius: 16px;
-          border: none;
-          background: linear-gradient(135deg, #14B8A6 0%, #0f9b8e 100%);
-          box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          width: 100%;
-          padding: 22px;
-          min-height: 72px;
-          font-family: "Inter", system-ui, sans-serif;
-          font-size: 19px;
-          font-weight: 600;
-          color: white;
-        }
-
-        .animated-send-button:hover:not(:disabled) {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 16px rgba(20, 184, 166, 0.4);
-        }
-
-        .animated-send-button:active:not(:disabled) {
-          transform: scale(0.98);
-        }
-
-        .animated-send-button:disabled {
-          opacity: 0.7;
-          cursor: not-allowed;
-        }
-
-        .button-state {
-          padding-left: 29px;
-          z-index: 2;
-          display: flex;
-          position: relative;
-        }
-
-        .button-state p {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .button-icon {
-          position: absolute;
-          left: 0;
-          top: 0;
-          bottom: 0;
-          margin: auto;
-          transform: scale(1.25);
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .button-icon svg {
-          overflow: visible;
-        }
-
-        .button-state p span {
-          display: block;
-          opacity: 0;
-          animation: slideDown 0.8s ease forwards;
-          animation-delay: calc(var(--char-index) * 0.03s);
-        }
-
-        .animated-send-button:hover .button-state p span {
-          animation: wave 0.5s ease forwards;
-          animation-delay: calc(var(--char-index) * 0.02s);
-        }
-
-        @keyframes wave {
-          30% {
-            opacity: 1;
-            transform: translateY(4px);
-          }
-          50% {
-            opacity: 1;
-            transform: translateY(-4px);
-            color: #0d9488;
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes slideDown {
-          0% {
-            opacity: 0;
-            transform: translateY(-20px) translateX(5px) rotate(-90deg);
-            filter: blur(5px);
-          }
-          30% {
-            opacity: 1;
-            transform: translateY(4px) translateX(0) rotate(0);
-            filter: blur(0);
-          }
-          50% {
-            opacity: 1;
-            transform: translateY(-3px) translateX(0) rotate(0);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0) translateX(0) rotate(0);
-          }
-        }
-
-        .state-default .button-icon svg {
-          animation: land 0.6s ease forwards;
-        }
-
-        .animated-send-button:hover .state-default .button-icon {
-          transform: rotate(45deg) scale(1.25);
-        }
-
-        .animated-send-button.sending .state-default .button-icon svg {
-          animation: takeOff 0.8s linear forwards;
-        }
-
-        .animated-send-button.sending .state-default .button-icon {
-          transform: rotate(0) scale(1.25);
-        }
-
-        @keyframes takeOff {
-          0% {
-            opacity: 1;
-          }
-          60% {
-            opacity: 1;
-            transform: translateX(80px) rotate(45deg) scale(2.2);
-          }
-          100% {
-            opacity: 0;
-            transform: translateX(180px) rotate(45deg) scale(0);
-          }
-        }
-
-        @keyframes land {
-          0% {
-            transform: translateX(-60px) translateY(30px) rotate(-50deg) scale(2);
-            opacity: 0;
-            filter: blur(3px);
-          }
-          100% {
-            transform: translateX(0) translateY(0) rotate(0);
-            opacity: 1;
-            filter: blur(0);
-          }
-        }
-
-        .state-default .button-icon:before {
-          content: "";
-          position: absolute;
-          top: 50%;
-          height: 2px;
-          width: 0;
-          left: -5px;
-          background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.5));
-        }
-
-        .animated-send-button.sending .state-default .button-icon:before {
-          animation: contrail 0.8s linear forwards;
-        }
-
-        @keyframes contrail {
-          0% {
-            width: 0;
-            opacity: 1;
-          }
-          8% {
-            width: 15px;
-          }
-          60% {
-            opacity: 0.7;
-            width: 80px;
-          }
-          100% {
-            opacity: 0;
-            width: 160px;
-          }
-        }
-
-        .state-sent {
-          display: none;
-        }
-
-        .state-sent.show {
-          display: flex;
-        }
-
-        .state-default.hide {
-          position: absolute;
-          opacity: 0;
-        }
-
-        .state-sent svg {
-          transform: scale(1.25);
-          margin-right: 8px;
-        }
-
-        .animated-send-button.sent .state-sent span {
-          opacity: 0;
-          animation: slideDown 0.8s ease forwards;
-          animation-delay: calc(var(--char-index) * 0.2s);
-        }
-
-        .animated-send-button.sent .state-sent .button-icon svg {
-          opacity: 0;
-          animation: appear 1.2s ease forwards 0.8s;
-        }
-
-        @keyframes appear {
-          0% {
-            opacity: 0;
-            transform: scale(4) rotate(-40deg);
-            filter: blur(4px);
-          }
-          30% {
-            opacity: 1;
-            transform: scale(0.6);
-            filter: blur(1px);
-          }
-          50% {
-            opacity: 1;
-            transform: scale(1.2);
-            filter: blur(0);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-      `}</style>
       </main>
   )
 }

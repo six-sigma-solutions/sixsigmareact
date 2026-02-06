@@ -88,8 +88,8 @@ export default function WebDesign() {
         </ul>
       </section>
 
-      {/* TESTIMONIALS */}
-      <Testimonials />
+      {/* TESTIMONIALS 
+      <Testimonials /> */}
 
       {/* CTA */}
       <ServiceCTA />

@@ -104,8 +104,8 @@ export default function WebDevelopment() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <Testimonials />
+      {/* TESTIMONIALS 
+      <Testimonials /> */}
 
       {/* CTA */}
       <ServiceCTA />

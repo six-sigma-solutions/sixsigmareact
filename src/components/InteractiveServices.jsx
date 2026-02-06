@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ================= IMAGE IMPORTS (REQUIRED) ================= */
+/* ================= IMAGE IMPORTS ================= */
 import img1 from "../assets/1.jpeg";
 import img2 from "../assets/2.jpeg";
 import img3 from "../assets/3.jpeg";
@@ -53,12 +53,22 @@ const services = [
 function AccordionItem({ service, isActive, onHover, onClick }) {
   return (
     <div
+      role="button"
+      tabIndex={0}
+      aria-pressed={isActive}
       onMouseEnter={onHover}
+      onFocus={onHover}
+      onTouchStart={onClick}
       onClick={onClick}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
       className={`
-        relative h-[450px] rounded-2xl overflow-hidden cursor-pointer
-        transition-all duration-700 ease-in-out
-        ${isActive ? "w-[400px] ring-2 ring-blue-500" : "w-[60px]"}
+        relative h-[420px] rounded-2xl overflow-hidden cursor-pointer
+        transition-all duration-700 ease-in-out outline-none
+        ${
+          isActive
+            ? "w-[280px] sm:w-[360px] lg:w-[400px] ring-2 ring-blue-500"
+            : "w-[60px]"
+        }
       `}
     >
       <img
@@ -91,12 +101,12 @@ export default function InteractiveServices() {
   const [hoverIndex, setHoverIndex] = useState(0);
   const [activeIndex, setActiveIndex] = useState(null);
 
-  
+  /* Auto-close after 5 seconds */
   useEffect(() => {
     if (activeIndex !== null) {
       const timer = setTimeout(() => {
         setActiveIndex(null);
-      }, 1000);
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
@@ -106,7 +116,10 @@ export default function InteractiveServices() {
   const currentService = services[currentIndex];
 
   return (
-    <section className="py-24 px-6 bg-white">
+    <section
+      id="services"
+      className="py-24 px-6 bg-white"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-16">
@@ -114,7 +127,7 @@ export default function InteractiveServices() {
             Our Services
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto">
-            Hover to preview. Click to focus.
+            Hover to preview. Click to focus (auto closes in 5 seconds).
           </p>
         </div>
 
@@ -123,7 +136,7 @@ export default function InteractiveServices() {
           <div className="w-full lg:w-1/2">
             <AnimatePresence mode="wait">
               <motion.div
-                key={currentIndex}
+                key={currentService.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}

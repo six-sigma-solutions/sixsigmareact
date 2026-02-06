@@ -250,20 +250,12 @@ body {
 /* ===============================
    SOCIAL ICONS
 ================================ */
+/* ===============================
+   SOCIAL ICONS BASE
+================================ */
+
 .social-section {
   position: relative;
-}
-
-.social-heading {
-  position: relative;
-  z-index: 20;
-  font-weight: 700;
-  margin-bottom: 28px;
-  padding-bottom: 15px;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: #14b8a6;
 }
 
 .wrapper {
@@ -272,13 +264,16 @@ body {
   gap: 14px;
   list-style: none;
   padding: 0;
-  margin: 0;
-  margin-top: 12px;
+  margin: 12px 0 0;
 }
 
 .wrapper .icon {
   position: relative;
 }
+
+/* ===============================
+   ICON CONTAINER
+================================ */
 
 .wrapper .icon a {
   width: 48px;
@@ -289,31 +284,65 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.35s ease, border-color 0.35s ease;
 }
 
-.wrapper svg {
+/* ===============================
+   ICON IMAGES (TWO SETS)
+================================ */
+
+.wrapper .icon img {
   width: 20px;
   height: 20px;
-  fill: #0a2540;
-  transition: fill 0.3s ease;
+  position: absolute;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
+
+/* Default icon */
+.icon-default {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover icon */
+.icon-hover {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+/* Swap icons on hover */
+.wrapper .icon:hover .icon-default {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.wrapper .icon:hover .icon-hover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===============================
+   TOOLTIP
+================================ */
 
 .wrapper .tooltip {
   position: absolute;
-  top: -40px;
+  top: -42px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(6px);
   background: #0a2540;
   color: #ffffff;
   padding: 6px 10px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  white-space: nowrap;
-  transition: all 0.25s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 10;
 }
 
@@ -328,16 +357,16 @@ body {
   background: inherit;
 }
 
+/* Tooltip show on hover */
 .wrapper .icon:hover .tooltip {
   opacity: 1;
-  transform: translate(-50%, -6px);
+  transform: translateX(-50%) translateY(0);
 }
 
-.wrapper .icon a:hover {
-  transform: translateY(-2px);
-}
+/* ===============================
+   BRAND HOVER COLORS
+================================ */
 
-/* Brand hover colors */
 .linkedin a:hover {
   background: #0077b5;
   border-color: #0077b5;
@@ -354,13 +383,20 @@ body {
 }
 
 .instagram a:hover {
-  background: linear-gradient(45deg, #f58529, #feda77, #dd2a7b, #8134af, #515bd4);
+  background: linear-gradient(
+    45deg,
+    #f58529,
+    #feda77,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
   border-color: transparent;
 }
 
-.wrapper .icon a:hover svg {
-  fill: #ffffff;
-}
+/* ===============================
+   ACCESSIBILITY
+================================ */
 
 .wrapper .icon a:focus-visible {
   outline: 3px solid #14b8a6;
@@ -368,21 +404,15 @@ body {
 }
 
 /* ===============================
-   FORM TOOLTIP ANIMATION
+   OPTIONAL: REDUCE MOTION
 ================================ */
-@keyframes tooltipSlide {
-  from { 
-    opacity: 0; 
-    transform: translateY(-4px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
 
-.animate-tooltip {
-  animation: tooltipSlide 0.25s ease;
+@media (prefers-reduced-motion: reduce) {
+  .wrapper .icon img,
+  .wrapper .tooltip,
+  .wrapper .icon a {
+    transition: none;
+  }
 }
 
 /* ===============================

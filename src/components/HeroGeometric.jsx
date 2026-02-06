@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
-/* SIMPLE cn() REPLACEMENT */
+/* SIMPLE cn() HELPER */
 function cn(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -14,19 +14,27 @@ function ElegantShape({
   rotate = 0,
   gradient = "from-white/[0.08]",
 }) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: -150, rotate: rotate - 15 }}
+      initial={{ opacity: 0, y: -120, rotate: rotate - 15 }}
       animate={{ opacity: 1, y: 0, rotate }}
       transition={{
-        duration: 2.4,
+        duration: 2.2,
         delay,
         ease: [0.23, 0.86, 0.39, 0.96],
       }}
-      className={cn("absolute", className)}
+      className={cn("absolute will-change-transform", className)}
     >
       <motion.div
-        animate={{ y: [0, 15, 0] }}
+        animate={
+          reduceMotion
+            ? {}
+            : {
+                y: [0, 15, 0],
+              }
+        }
         transition={{
           duration: 12,
           repeat: Infinity,
@@ -56,11 +64,11 @@ export default function HeroGeometric({
 }) {
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: (i) => ({
+    visible: (i = 0) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 1,
+        duration: 0.9,
         delay: 0.4 + i * 0.2,
         ease: [0.25, 0.4, 0.25, 1],
       },
@@ -68,12 +76,16 @@ export default function HeroGeometric({
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303]">
+    <header
+      id="home"
+      role="banner"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030303]"
+    >
       {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-transparent to-rose-500/10 blur-3xl" />
 
       {/* Floating Shapes */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <ElegantShape
           delay={0.3}
           width={600}
@@ -107,6 +119,7 @@ export default function HeroGeometric({
           variants={fadeUp}
           initial="hidden"
           animate="visible"
+          viewport={{ once: true }}
           className="text-4xl sm:text-6xl md:text-7xl font-bold mb-8"
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70">
@@ -123,6 +136,7 @@ export default function HeroGeometric({
           variants={fadeUp}
           initial="hidden"
           animate="visible"
+          viewport={{ once: true }}
           className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto leading-relaxed"
         >
           We help organizations optimize processes, reduce inefficiencies,
@@ -130,6 +144,6 @@ export default function HeroGeometric({
           methodologies and modern digital solutions.
         </motion.p>
       </div>
-    </section>
+    </header>
   );
 }

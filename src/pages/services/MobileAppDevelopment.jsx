@@ -112,8 +112,8 @@ export default function MobileAppDevelopment() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
-      <Testimonials />
+      {/* TESTIMONIALS 
+      <Testimonials />*/}
 
       {/* CTA */}
       <ServiceCTA />

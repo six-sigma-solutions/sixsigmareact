@@ -6,6 +6,7 @@ import AboutProcessIndustries from "../components/AboutProcessIndustries";
 import Testimonials from "../components/Testimonials";
 import InteractiveServices from "../components/InteractiveServices";
 import HeroGeometric from "../components/HeroGeometric";
+import ServiceCTA from "../components/ServiceCTA";
 
 /* ================= TEAM DATA ================= */
 const team = [
@@ -198,22 +199,8 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="bg-teal py-20 px-6 text-center text-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Improve Your Business Performance?
-          </h2>
-          <p className="text-lg mb-10 opacity-90">
-            Talk to our Six Sigma experts today.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-block bg-white text-teal px-10 py-4 rounded-xl font-bold shadow-xl transition hover:scale-105"
-          >
-            Talk to an Expert
-          </Link>
-        </div>
-      </section>
+      <ServiceCTA/>
+      
     </main>
   );
 }

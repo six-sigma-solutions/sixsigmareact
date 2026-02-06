@@ -10,32 +10,69 @@ A modern React-based website for Six Sigma Solutions, converted from a static HT
 - **Vite** - Fast build tool and dev server
 - **Lucide React** - Icon library
 - **AOS** - Animate on Scroll library
+- **Lottie-web** – JSON-based animations
 
 ## 📁 Project Structure
 
 ```
 six-sigma-react/
 ├── public/
-│   └── img/              # Static images (logo, team photos, etc.)
+│   ├── img/
+│   │   ├── logo.png
+│   │   ├── team/
+│   │   │   ├── 1.png
+│   │   │   ├── 2.png
+│   │   │   └── 3.png
+│   │   └── business.json        # Lottie animation
+│   └── favicon.ico
+│
 ├── src/
-│   ├── components/       # Reusable components
-│   │   ├── Navbar.jsx
+│   ├── assets/                  # Imported images (ESM)
+│   │   ├── Image.png
+│   │   ├── Image.svg
+│   │   └── Image.jpg
+│
+│   ├── components/              # Reusable UI components
+│   │   ├── AboutProcessIndustries.jsx
 │   │   ├── Footer.jsx
-│   │   └── SocialIcons.jsx
-│   ├── pages/            # Page components
+│   │   ├── HeroGeometric.jsx
+│   │   ├── InteractiveServices.jsx
+│   │   ├── Loader.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── ServiceCTA.jsx
+│   │   ├── ServiceFeatures.jsx
+│   │   ├── ServiceHero.jsx
+│   │   ├── SocialIcons.jsx
+│   │   └── Testimonials.jsx
+│
+│   ├── pages/                   # Route-level pages
 │   │   ├── Home.jsx
 │   │   ├── Contact.jsx
 │   │   ├── PrivacyPolicy.jsx
-│   │   └── TermsConditions.jsx
-│   ├── styles/           # CSS files
-│   │   └── index.css
-│   ├── App.jsx           # Main app with routing
-│   └── main.jsx          # Entry point
-├── index.html            # HTML template
+│   │   ├── TermsConditions.jsx
+│   │   └── services/
+│   │       ├── AIAgents.jsx
+│   │       ├── DigitalMarketing.jsx
+│   │       ├── MobileAppDevelopment.jsx
+│   │       ├── WebDesign.jsx
+│   │       └── WebDevelopment.jsx
+│
+│   ├── styles/
+│   │   ├── index.css                  # Main UI Style
+│   │   └── form.css                  # Form UI Style
+│
+│   ├── App.jsx                  # Main app & routes
+│   └── main.jsx                 # Entry point
+│
+├── index.html
 ├── package.json
-├── vite.config.js
+├── package-lock.json
 ├── tailwind.config.js
-└── postcss.config.js
+├── postcss.config.js
+├── vite.config.js
+├── .gitignore
+└── README.md
+
 ```
 
 ## 🛠️ Setup & Installation
@@ -45,12 +82,13 @@ six-sigma-react/
    npm install
    ```
 
-2. **Add your images:**
-   Copy your images to the `public/img/` folder:
+2. **Add assets:**
+   Place static files in `public/img/`:
    - `Six Sigma logo.png` - Company logo
    - `1.png`, `2.png`, `3.png` - Team member photos
    - `business.json` - Lottie animation file
    - Service images (optional)
+   Imported images (ESM) go inside `src/assets/`.
 
 3. **Start development server:**
    ```bash
@@ -67,42 +105,173 @@ six-sigma-react/
    npm run preview
    ```
 
-## 📄 Pages
+## 📄 Pages & Routes
 
-| Route | Page | Description |
-|-------|------|-------------|
-| `/` | Home | Main landing page with hero, services, team, FAQ |
-| `/contact` | Contact | Contact form with validation |
-| `/privacy-policy` | Privacy Policy | Legal privacy information |
-| `/terms-and-conditions` | Terms | Legal terms and conditions |
+| Route                              | Page              | Description                              |
+| ---------------------------------- | ----------------- | ---------------------------------------- |
+| `/`                                | Home              | Hero, services, about, FAQ, testimonials |
+| `/services/web-development`        | Web Development   | Service detail page                      |
+| `/services/mobile-app-development` | Mobile App Dev    | Service detail page                      |
+| `/services/web-design`             | Web Design        | Service detail page                      |
+| `/services/ai-agents`              | AI Agents         | Service detail page                      |
+| `/services/digital-marketing`      | Digital Marketing | Service detail page                      |
+| `/contact`                         | Contact           | Contact form                             |
+| `/privacy-policy`                  | Privacy Policy    | Legal info                               |
+| `/terms-and-conditions`            | Terms             | Legal info                               |
 
-## 🔧 Configuration
+
+## 🎨 Styling & Configuration
 
 ### Tailwind CSS
 Custom colors and fonts are configured in `tailwind.config.js`:
 - `navy`: #0A2540
 - `teal`: #14B8A6
-- Fonts: Baloo Bhaijaan 2, Poppins
+-  Fonts: 
+      - Baloo Bhaijaan  
+      - Poppins
 
 ### Contact Form
-The contact form submits to a Google Apps Script endpoint. Update the URL in `src/pages/Contact.jsx` if needed.
+  - Uses a Google Apps Script backend
+  - Endpoint can be updated in:
+    ```bash
+   src/pages/Contact.jsx
+   ```
 
 ## 📱 Responsive Design
 
-The site is fully responsive with breakpoints at:
+Optimized for all screen sizes:
 - Mobile: < 640px
 - Tablet: 640px - 1024px
 - Desktop: > 1024px
 
-## ⚡ Features
+## ⚡ Key Features
 
-- Smooth scroll navigation
-- Animated service cards with hover effects
-- FAQ accordion
-- Form validation with debounced feedback
-- Social media icons with hover animations
+- Modular React architecture
+- Fully responsive UI
+- Interactive service accordion
+- Animated hero (Framer Motion)
 - AOS scroll animations
-- Mobile-friendly navigation
+- Lottie animations
+- SEO-friendly routing
+- Clean, maintainable codebase
+
+## 🚀 Deployment Guide
+
+This project is built with Vite + React and can be deployed easily on modern hosting platforms.
+
+## 🔷 Deploy on Vercel (Recommended)
+
+Vercel is the best choice for React + Vite projects.
+
+## Steps
+
+1. **Push your project to GitHub**
+2. **Go to 👉 https://vercel.com**
+3. **Click New Project**
+4. **Import your GitHub repository**
+5. **Use these settings:**
+
+| Setting          | Value           |
+| ---------------- | --------------- |
+| Framework        | **Vite**        |
+| Build Command    | `npm run build` |
+| Output Directory | `dist`          |
+| Install Command  | `npm install`   |
+
+6. **Click Deploy**
+
+ - ✅ Automatic builds on every push
+ - ✅ Free SSL & CDN
+ - ✅ Fastest setup
+
+## 🔷 Deploy on Netlify
+## Option 1: Netlify UI (Recommended)
+
+1. **Push project to GitHub**
+2. **Go to 👉 https://netlify.com**
+3. **Click Add new site → Import from Git**
+4. **Select your repository**
+5. **Configure build settings:**
+
+| Setting           | Value           |
+| ----------------- | --------------- |
+| Build command     | `npm run build` |
+| Publish directory | `dist`          |
+
+
+6. **Click Deploy site**
+
+## Option 2: Netlify CLI
+```bash
+npm install -g netlify-cli
+npm run build
+netlify deploy --prod --dir=dist
+```
+## 🔷 Deploy on GitHub Pages
+
+## GitHub Pages requires a **base path** configuration.
+
+## Step 1: Update vite.config.js
+```bash
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  base: "/six-sigma-react/", // repo name
+});
+```
+## Step 2: Install gh-pages
+```bash
+npm install --save-dev gh-pages
+```
+## Step 3: Update package.json
+```bash
+{
+  "homepage": "https://your-username.github.io/six-sigma-react",
+  "scripts": {
+    "build": "vite build",
+    "deploy": "gh-pages -d dist"
+  }
+}
+```
+## Step 4: Deploy
+```bash
+npm run build
+npm run deploy
+```
+
+Your site will be live at:
+```bash
+https://your-username.github.io/six-sigma-react
+```
+
+## ⚠️ Important Notes (All Platforms)
+*React Router Fix (Required)*
+
+For Netlify & GitHub Pages, add a redirect rule.
+
+## Netlify ```bash(public/_redirects)```
+```bash
+/* /index.html 200
+```
+
+**GitHub Pages**
+
+Use **HashRouter** OR configure SPA fallback.
+
+## ✅ Recommended Platform Summary
+| Platform         | Recommendation                       |
+| ---------------- | ------------------------------------ |
+| **Vercel**       | ⭐⭐⭐⭐⭐ Best (Fast, easy, auto-deploy) |
+| **Netlify**      | ⭐⭐⭐⭐ Very good                       |
+| **GitHub Pages** | ⭐⭐ Only for demos                    |
+
+## 🏁 Final Recommendation
+
+- 👉 Use Vercel for production
+- 👉 Netlify for backups / client previews
+- 👉 GitHub Pages only for demos
 
 ## 📝 License
 

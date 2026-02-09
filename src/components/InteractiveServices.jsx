@@ -127,7 +127,7 @@ export default function InteractiveServices() {
             Our Services
           </h2>
           <p className="text-slate-500 max-w-2xl mx-auto">
-            Hover to preview. Click to focus (auto closes in 5 seconds).
+            Comprehensive solutions tailored to drive operational excellence.
           </p>
         </div>
 

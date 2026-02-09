@@ -54,7 +54,7 @@ export default function Testimonials() {
   }, [handleNext, active]); // Reset timer when user manually interacts
 
   return (
-    <section id="testimonials" className="py-12 md:py-20 px-6 bg-white overflow-hidden">
+    <section id="testimonials" className="pt-16 md:pt-20 pb-12 md:pb-20 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-10 md:mb-16">
@@ -97,7 +97,7 @@ export default function Testimonials() {
                         scale: 1,
                         z: 0,
                         rotate: 0,
-                        zIndex: 50,
+                        zIndex: 10,
                         y: [0, -20, 0],
                       }}
                       exit={{

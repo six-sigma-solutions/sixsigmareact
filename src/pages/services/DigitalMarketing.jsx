@@ -1,6 +1,6 @@
 import ServiceHero from "../../components/ServiceHero";
 import ServiceFeatures from "../../components/ServiceFeatures";
-import DigitalMarketing from "../../assets/digital.webp";
+import DigitalMarketingImg from "../../assets/digital.webp";
 
 import {
   TrendingUp,
@@ -18,7 +18,7 @@ export default function DigitalMarketing() {
       <ServiceHero
         title="Digital Marketing Services"
         subtitle="Data-driven digital marketing strategies that increase visibility, generate leads, and drive measurable growth"
-        image={DigitalMarketing}
+        image={DigitalMarketingImg}
       />
 
       {/* WHAT WE DELIVER */}

@@ -254,21 +254,32 @@ body {
    SOCIAL ICONS BASE
 ================================ */
 
+/* ===============================
+   SOCIAL SECTION (FOOTER)
+================================ */
+
 .social-section {
   position: relative;
+  margin-top: 28px; /* space from description text */
 }
+
+/* ===============================
+   ICON LIST
+================================ */
 
 .wrapper {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 14px;
   list-style: none;
   padding: 0;
-  margin: 12px 0 0;
+  margin: 0;
 }
 
+/* Individual icon wrapper */
 .wrapper .icon {
   position: relative;
+  display: flex;
 }
 
 /* ===============================
@@ -276,8 +287,8 @@ body {
 ================================ */
 
 .wrapper .icon a {
-  width: 48px;
-  height: 48px;
+  width: 38px;               /* slightly larger for footer */
+  height: 38px;
   border-radius: 50%;
   background: #ffffff;
   border: 1px solid #e5e7eb;
@@ -291,29 +302,26 @@ body {
 }
 
 /* ===============================
-   ICON IMAGES (TWO SETS)
+   ICON IMAGES
 ================================ */
 
 .wrapper .icon img {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   position: absolute;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* Default icon */
 .icon-default {
   opacity: 1;
   transform: scale(1);
 }
 
-/* Hover icon */
 .icon-hover {
   opacity: 0;
   transform: scale(0.85);
 }
 
-/* Swap icons on hover */
 .wrapper .icon:hover .icon-default {
   opacity: 0;
   transform: scale(1.1);
@@ -325,12 +333,12 @@ body {
 }
 
 /* ===============================
-   TOOLTIP
+   TOOLTIP (FOOTER SAFE)
 ================================ */
 
 .wrapper .tooltip {
   position: absolute;
-  top: -42px;
+  top: -46px; /* more breathing room */
   left: 50%;
   transform: translateX(-50%) translateY(6px);
   background: #0a2540;
@@ -343,7 +351,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 10;
+  z-index: 20;
 }
 
 .wrapper .tooltip::after {
@@ -357,14 +365,13 @@ body {
   background: inherit;
 }
 
-/* Tooltip show on hover */
 .wrapper .icon:hover .tooltip {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
 /* ===============================
-   BRAND HOVER COLORS
+   BRAND COLORS
 ================================ */
 
 .linkedin a:hover {
@@ -383,16 +390,17 @@ body {
 }
 
 .instagram a:hover {
-  background: linear-gradient(
-    45deg,
-    #f58529,
-    #feda77,
-    #dd2a7b,
-    #8134af,
-    #515bd4
+  background: radial-gradient(
+      circle at 30% 107%,
+      #fdf497 0%,
+      #fdf497 5%,
+      #fd5949 45%,
+      #d6249f 60%,
+      #285AEB 90%
   );
   border-color: transparent;
 }
+
 
 /* ===============================
    ACCESSIBILITY
@@ -404,7 +412,7 @@ body {
 }
 
 /* ===============================
-   OPTIONAL: REDUCE MOTION
+   REDUCED MOTION
 ================================ */
 
 @media (prefers-reduced-motion: reduce) {

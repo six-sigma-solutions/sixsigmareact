@@ -1,160 +1,232 @@
-import { useState, useRef } from 'react'
+import { useState, useRef } from "react";
 import "../styles/form.css";
-
 
 const RULES = {
   nameMin: 3,
   mobileLength: 10,
-  messageMin: 10
-}
+  messageMin: 10,
+};
 
 function Contact() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    mobile: '',
-    email: '',
-    message: ''
-  })
-  const [errors, setErrors] = useState({})
-  const [status, setStatus] = useState({ message: '', type: '' })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [buttonState, setButtonState] = useState('default')
-  const debounceTimers = useRef({})
+    fullName: "",
+    mobile: "",
+    email: "",
+    message: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState({ message: "", type: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [buttonState, setButtonState] = useState("default");
+  const debounceTimers = useRef({});
+
+  /* ===================== FORM LOGIC (UNCHANGED) ===================== */
 
   const validateField = (name, value) => {
     switch (name) {
-      case 'fullName':
+      case "fullName":
         if (value && value.length < RULES.nameMin) {
-          return ' Name must be at least 3 characters'
+          return " Name must be at least 3 characters";
         }
-        break
-      case 'mobile':
+        break;
+      case "mobile":
         if (value && value.length !== RULES.mobileLength) {
-          return ' Mobile must be 10 digits'
+          return " Mobile must be 10 digits";
         }
-        break
-      case 'email':
+        break;
+      case "email":
         if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-          return 'Invalid email format'
+          return "Invalid email format";
         }
-        break
-      case 'message':
+        break;
+      case "message":
         if (value && value.length < RULES.messageMin) {
-          return ' Minimum 10 characters required'
+          return " Minimum 10 characters required";
         }
-        break
+        break;
     }
-    return ''
-  }
+    return "";
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    let processedValue = value
+    const { name, value } = e.target;
+    let processedValue = value;
 
-    if (name === 'fullName') {
-      processedValue = value.replace(/[^a-zA-Z\s]/g, '')
-    } else if (name === 'mobile') {
-      processedValue = value.replace(/[^0-9]/g, '').slice(0, 10)
+    if (name === "fullName") {
+      processedValue = value.replace(/[^a-zA-Z\s]/g, "");
+    } else if (name === "mobile") {
+      processedValue = value.replace(/[^0-9]/g, "").slice(0, 10);
     }
 
-    setFormData(prev => ({ ...prev, [name]: processedValue }))
-    setErrors(prev => ({ ...prev, [name]: '' }))
+    setFormData((prev) => ({ ...prev, [name]: processedValue }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
 
-    clearTimeout(debounceTimers.current[name])
+    clearTimeout(debounceTimers.current[name]);
     debounceTimers.current[name] = setTimeout(() => {
-      const error = validateField(name, processedValue)
+      const error = validateField(name, processedValue);
       if (error) {
-        setErrors(prev => ({ ...prev, [name]: error }))
+        setErrors((prev) => ({ ...prev, [name]: error }));
       }
-    }, 700)
-  }
+    }, 700);
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!navigator.onLine) {
-      setStatus({ message: ' You are offline. Please check your connection.', type: 'error' })
-      return
+      setStatus({
+        message: " You are offline. Please check your connection.",
+        type: "error",
+      });
+      return;
     }
 
-    const newErrors = {}
-    let hasError = false
+    const newErrors = {};
+    let hasError = false;
 
     if (formData.fullName.length < RULES.nameMin) {
-      newErrors.fullName = ' Enter a valid name'
-      hasError = true
+      newErrors.fullName = " Enter a valid name";
+      hasError = true;
     }
     if (formData.mobile.length !== RULES.mobileLength) {
-      newErrors.mobile = ' Enter a valid mobile number'
-      hasError = true
+      newErrors.mobile = " Enter a valid mobile number";
+      hasError = true;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = ' Enter a valid email'
-      hasError = true
+      newErrors.email = " Enter a valid email";
+      hasError = true;
     }
     if (formData.message.length < RULES.messageMin) {
-      newErrors.message = ' Message must be at least 10 characters'
-      hasError = true
+      newErrors.message = " Message must be at least 10 characters";
+      hasError = true;
     }
 
-    setErrors(newErrors)
+    setErrors(newErrors);
 
     if (hasError) {
-      setStatus({ message: ' Please fix the errors above', type: 'error' })
-      return
+      setStatus({ message: " Please fix the errors above", type: "error" });
+      return;
     }
 
-    setIsSubmitting(true)
-    setButtonState('sending')
-    setStatus({ message: '', type: '' })
+    setIsSubmitting(true);
+    setButtonState("sending");
+    setStatus({ message: "", type: "" });
 
     try {
-      const formDataToSend = new FormData()
-      formDataToSend.append('fullName', formData.fullName.trim())
-      formDataToSend.append('mobile', formData.mobile.trim())
-      formDataToSend.append('email', formData.email.trim().toLowerCase())
-      formDataToSend.append('message', formData.message.trim())
+      const formDataToSend = new FormData();
+      formDataToSend.append("fullName", formData.fullName.trim());
+      formDataToSend.append("mobile", formData.mobile.trim());
+      formDataToSend.append(
+        "email",
+        formData.email.trim().toLowerCase()
+      );
+      formDataToSend.append("message", formData.message.trim());
 
-      await fetch('https://script.google.com/macros/s/AKfycbzC7f_00D8bSIomyyZ_U-BYBM3ZhbpVmo1mF9xZHtvWofF0vWtOifqtjcyA-5cqhBgwaw/exec', {
-        method: 'POST',
-        body: formDataToSend,
-        mode: 'no-cors'
-      })
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbzC7f_00D8bSIomyyZ_U-BYBM3ZhbpVmo1mF9xZHtvWofF0vWtOifqtjcyA-5cqhBgwaw/exec",
+        {
+          method: "POST",
+          body: formDataToSend,
+          mode: "no-cors",
+        }
+      );
 
-      setButtonState('sent')
-      setFormData({ fullName: '', mobile: '', email: '', message: '' })
+      setButtonState("sent");
+      setFormData({ fullName: "", mobile: "", email: "", message: "" });
 
       setTimeout(() => {
-        setButtonState('default')
-      }, 3000)
+        setButtonState("default");
+      }, 3000);
     } catch (error) {
-      console.error('Submission error:', error)
-      setStatus({ message: 'Submission failed. Try again.', type: 'error' })
-      setButtonState('default')
+      console.error("Submission error:", error);
+      setStatus({ message: "Submission failed. Try again.", type: "error" });
+      setButtonState("default");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
-  const renderAnimatedLabel = (text) => {
-    return text.split('').map((char, index) => (
-        <span key={index} style={{ transitionDelay: `${index * 50}ms` }}>
-        {char === ' ' ? '\u00A0' : char}
+  const renderAnimatedLabel = (text) =>
+    text.split("").map((char, index) => (
+      <span key={index} style={{ transitionDelay: `${index * 50}ms` }}>
+        {char === " " ? "\u00A0" : char}
       </span>
-    ))
-  }
+    ));
+
+  /* ===================== UI LAYOUT ===================== */
 
   return (
-      <main className="pt-32 pb-24 px-6 max-w-4xl mx-auto">
+    <main className="pt-32 pb-24 px-6 max-w-6xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-16 items-start">
+
+        {/* ================= LEFT CONTENT ================= */}
+        <div className="space-y-12">
+          <div>
+            <h1 className="text-4xl font-bold text-navy mb-4">
+              Let’s Build Something Great
+            </h1>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Whether you’re planning a new product, improving an existing
+              system, or exploring automation, our team is ready to help
+              you move forward with clarity and confidence.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-semibold text-navy mb-4">
+              What Happens After You Contact Us?
+            </h3>
+            <ul className="space-y-3 text-slate-600">
+              <li>✔ We review your request within 24 hours</li>
+              <li>✔ A specialist connects with you for clarity</li>
+              <li>✔ You receive a clear roadmap & next steps</li>
+              <li>✔ No pressure. No spam. Just honest guidance.</li>
+            </ul>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
+              <h4 className="font-bold text-navy mb-2">
+                Enterprise-Grade Approach
+              </h4>
+              <p className="text-sm text-slate-600">
+                Structured delivery, transparent communication,
+                and scalable solutions.
+              </p>
+            </div>
+
+            <div className="p-6 bg-slate-50 rounded-xl border border-slate-200">
+              <h4 className="font-bold text-navy mb-2">
+                Secure & Confidential
+              </h4>
+              <p className="text-sm text-slate-600">
+                Your ideas and data are handled with strict confidentiality.
+              </p>
+            </div>
+          </div>
+
+          <p className="text-sm text-slate-500">
+            Prefer email or a quick discussion?
+            <br />
+            <span className="font-medium text-slate-700">
+              We usually respond within one business day.
+            </span>
+          </p>
+        </div>
+
+        {/* ================= FORM (UNCHANGED) ================= */}
         <div
-            className="p-12 bg-white border border-slate-200 rounded-[2rem] shadow-xl"
-            data-aos="fade-up"
+          className="p-12 bg-white border border-slate-200 rounded-[2rem] shadow-xl"
+          data-aos="fade-up"
         >
-          <h2 className="text-3xl font-bold text-navy mb-4">Let's Build Something Amazing</h2>
+          <h2 className="text-3xl font-bold text-navy mb-4">
+            Contact Our Team
+          </h2>
           <p className="text-slate-500 mb-12">
-            Ready to optimize your business? Reach out to us today.
+            Share your requirements and we’ll take it from there.
           </p>
 
+          {/* 🔽 YOUR FORM STARTS — UNCHANGED 🔽 */}
           <form onSubmit={handleSubmit} className="space-y-8" noValidate>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Full Name */}
@@ -305,8 +377,10 @@ function Contact() {
             )}
           </form>
         </div>
-      </main>
-  )
+
+      </div>
+    </main>
+  );
 }
 
-export default Contact
+export default Contact;

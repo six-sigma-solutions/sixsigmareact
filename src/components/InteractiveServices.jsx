@@ -4,11 +4,11 @@ import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ================= IMAGE IMPORTS ================= */
-import Webdev from "../assets/Web develop.png";
-import Mobile from "../assets/Mobile.png";
-import Webdesign from "../assets/Web design.png";
-import Ai from "../assets/Ai.png";
-import Digital from "../assets/Digital.png";
+import Webdev from "../assets/Web develop.webp";
+import Mobile from "../assets/Mobile.webp";
+import Webdesign from "../assets/Web design.webp";
+import Ai from "../assets/Ai.webp";
+import Digital from "../assets/Digital.webp";
 
 /* ================= SERVICES DATA ================= */
 const services = [
